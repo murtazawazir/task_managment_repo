@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Open Demand App Menu-->
+    <!-- Top menu item -->
+    <menuitem name="Open Demand" id="open_demand_app_menu" sequence="10"
+              web_icon="open_demand,static/description/icon.png"/>
+    <!-- App Open Demand Menu-->
+    <menuitem
+            id="open_demand_main_menu_app"
+            name="Open Demand" parent="open_demand.open_demand_app_menu"
+            sequence="10"/>
+
+    <!-- Reporting Menu-->
+    <menuitem
+            id="open_demand_reporting_main_menu"
+            name="Reporting" parent="open_demand.open_demand_app_menu"
+            sequence="20"/>
+
+    <!--Open Demand Sub Action Menus-->
+    <menuitem
+            id="asset_sub_menu_app"
+            name="Open Demand"
+            action="open_demand.action_sb_open_demand"
+            parent="open_demand.open_demand_main_menu_app"
+            sequence="10"/>
+
+    <!--Open Demand By Client Report Sub Action Menus-->
+    <menuitem
+            id="open_demand_client_report_sub_menu_app"
+            name="By Client"
+            action="open_demand.action_open_demand_client_report"
+            parent="open_demand.open_demand_reporting_main_menu"
+            sequence="10"/>
+
+    <!--Open Demand By Project Report Sub Action Menus-->
+    <menuitem
+            id="open_demand_project_report_sub_menu_app"
+            name="By Project"
+            action="open_demand.action_open_demand_project_report"
+            parent="open_demand.open_demand_reporting_main_menu"
+            sequence="20"/>
+
+    <!--HR Recruitment Team Action Menus-->
+    <menuitem
+            id="menu_hr_recruitment_team"
+            name="Recruitment Team"
+            parent="hr_recruitment.menu_hr_recruitment_configuration"
+            action="action_hr_recruitment_team"
+            sequence="10"
+    />
+
+</odoo>

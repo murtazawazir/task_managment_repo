@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--Open Demand By Client Report Graph View-->
+    <record id="sb_open_demand_client_graph" model="ir.ui.view">
+        <field name="model">sb.open.demand</field>
+        <field name="mode">primary</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <graph string="By Client" sample="1">
+                <field name="project_id"/>
+                <field name="country_id"/>
+                <field name="city_id"/>
+                <field name="street"/>
+                <field name="resource_type_id"/>
+                <field name="state"/>
+            </graph>
+        </field>
+    </record>
+
+    <!--Open Demand By Client Report Search View-->
+    <record id="sb_open_demand_client_search" model="ir.ui.view">
+        <field name="name">sb.open.demand.search</field>
+        <field name="model">sb.open.demand</field>
+        <field name="arch" type="xml">
+            <search string="By Client Search">
+                <field name="name"/>
+                <field name="client_id"/>
+                <separator/>
+                <group string="Group By">
+                    <filter string="By Client" name="client_id_grp"
+                            context="{'group_by':'client_id',}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--Open Demand By Client Report Action-->
+    <record id="action_open_demand_client_report" model="ir.actions.act_window">
+        <field name="name">By Client</field>
+        <field name="res_model">sb.open.demand</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="open_demand.sb_open_demand_client_graph"/>
+        <field name="context">{'group_by': ['client_id', 'project_id', 'country_id', 'city_id', 'street',
+            'resource_type_id', 'state']}
+        </field>
+        <field name="search_view_id" ref="open_demand.sb_open_demand_client_search"/>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+
+    <!--Open Demand By Project Report Graph View-->
+    <record id="sb_open_demand_project_graph" model="ir.ui.view">
+        <field name="model">sb.open.demand</field>
+        <field name="mode">primary</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <graph string="By Project" sample="1">
+                <field name="country_id"/>
+                <field name="city_id"/>
+                <field name="street"/>
+                <field name="resource_type_id"/>
+                <field name="state"/>
+            </graph>
+        </field>
+    </record>
+
+    <!--Open Demand By Project Report Search View-->
+    <record id="sb_open_demand_project_search" model="ir.ui.view">
+        <field name="name">sb.open.demand.project.search</field>
+        <field name="model">sb.open.demand</field>
+        <field name="arch" type="xml">
+            <search string="By Project Search">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="project_id"/>
+                <field name="country_id"/>
+                <field name="city_id"/>
+                <field name="street"/>
+                <field name="resource_type_id"/>
+                <field name="state"/>
+                <separator/>
+                <group string="Group By">
+                    <filter string="By Project" name="project_id_grp"
+                            context="{'group_by':'project_id',}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--Open Demand By Project Report Action-->
+    <record id="action_open_demand_project_report" model="ir.actions.act_window">
+        <field name="name">By Project</field>
+        <field name="res_model">sb.open.demand</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="open_demand.sb_open_demand_project_graph"/>
+        <field name="context">{'group_by': ['project_id', 'country_id', 'city_id', 'street', 'resource_type_id',
+            'state']}
+        </field>
+        <field name="search_view_id" ref="open_demand.sb_open_demand_project_search"/>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            </p>
+        </field>
+    </record>
+</odoo>
