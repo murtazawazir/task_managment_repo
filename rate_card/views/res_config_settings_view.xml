@@ -1,0 +1,41 @@
+<odoo>
+    <record id="view_res_config_settings_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <block name="catalog_setting_container" position="before">
+                <block title="Rate Card" id="rate_card">
+                    <setting id="fixed_line_discount" help="Apply Fixed Discount Line Wise">
+                        <field name="fixed_line_discount"/>
+                    </setting>
+<!--                    <setting id="fixed_total_discount" help="Apply Fixed Discount on Total Amount">-->
+<!--                        <field name="fixed_total_discount"/>-->
+<!--                    </setting>-->
+                    <setting id="percentage_line_discount" help="Apply Percentage Discount Line Wise">
+                        <field name="percentage_line_discount"/>
+                    </setting>
+<!--                    <setting id="percentage_total_discount" help="Apply Percentage Discount on Total Amount">-->
+<!--                        <field name="percentage_total_discount"/>-->
+<!--                    </setting>-->
+                    <setting id="holiday_uplift" help="Holiday Uplift">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <label for="holiday_uplift" class="o_light_label mr8"/>
+                                <field name="holiday_uplift" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </setting>
+                    <setting id="after_hours_uplift" help="After Hours Uplift">
+                        <div class="content-group">
+                            <div class="mt16">
+                                <label for="after_hours_uplift" class="o_light_label mr8"/>
+                                <field name="after_hours_uplift" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </setting>
+                </block>
+            </block>
+        </field>
+    </record>
+</odoo>

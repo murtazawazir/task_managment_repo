@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="service_type_line_view_form" model="ir.ui.view">
+        <field name="name">service.type.line.view.form</field>
+        <field name="model">service.type.line</field>
+        <field name="arch" type="xml">
+            <form string="Service Type Coounty Rate Line">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="service_type_id"/>
+                            <field name="rate_country_id"/>
+                        </group>
+                        <group>
+                            <field name="rate"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="service_type_line_view_tree" model="ir.ui.view">
+        <field name="name">service.type.line.view.tree</field>
+        <field name="model">service.type.line</field>
+        <field name="arch" type="xml">
+            <tree string="Service Type Country Rate Line">
+               <field name="service_type_id"/>
+               <field name="rate_country_id"/>
+               <field name="rate"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="service_type_line_view_search" model="ir.ui.view">
+        <field name="name">service.type.line.view.search</field>
+        <field name="model">service.type.line</field>
+        <field name="arch" type="xml">
+            <search string="Service Type Line">
+                <field name="service_type_id"/>
+                <field name="rate_country_id"/>
+                <separator/>
+                <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                <group string="Group By">
+                    <filter string="Service Type" name="service_type_id_grp" context="{'group_by':'service_type_id', 'active':True}" />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="service_type_line_action" model="ir.actions.act_window">
+        <field name="name">Service Type Lines</field>
+        <field name="res_model">service.type.line</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{
+                'search_default_service_type_id_grp': 1,
+            }
+        </field>
+        <field name="search_view_id" ref="rate_card.service_type_line_view_search"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new Service Type Country Rate Line
+            </p>
+        </field>
+    </record>
+
+</odoo>

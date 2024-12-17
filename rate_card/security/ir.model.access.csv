@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_rate_country,rate.country,model_rate_country,base.group_user,1,1,1,1
+access_rate_city,rate.city,model_rate_city,base.group_user,1,1,1,1
+access_project_sla,project.sla,model_project_sla,base.group_user,1,1,1,1
+access_rate_region,rate_region,model_rate_region,base.group_user,1,1,1,1
+access_project_skill,project.skill,model_project_skill,base.group_user,1,1,1,1
+access_project_worksite,project.worksite,model_project_worksite,base.group_user,1,1,1,1
+access_project_project_rate,project.project.rate,model_project_project_rate,base.group_user,1,1,1,1
+access_rate_city_line,rate.city.line,model_rate_city_line,base.group_user,1,1,1,1
+access_project_sla_line,project.sla.line,model_project_sla_line,base.group_user,1,1,1,1
+access_service_type,service.type,model_service_type,base.group_user,1,1,1,1
+access_service_type_line,service.type.line,model_service_type_line,base.group_user,1,1,1,1
+access_rate_uplift_line,rate.uplift.line,model_rate_uplift_line,base.group_user,1,1,1,1
+access_rate_card_country_wizard,rate.card.country.wizard,model_rate_card_country_wizard,base.group_user,1,1,1,1
+

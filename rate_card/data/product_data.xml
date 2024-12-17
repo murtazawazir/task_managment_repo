@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+
+        <record id="service_fee_product" model="product.product">
+            <field name="name">Service Fee</field>
+            <field name="list_price">1.0</field>
+            <field name="standard_price">1.0</field>
+            <field name="detailed_type">service</field>
+            <field name="taxes_id" eval="[]"/>
+            <field name="supplier_taxes_id" eval="[]" />
+        </record>
+
+    </data>
+</odoo>

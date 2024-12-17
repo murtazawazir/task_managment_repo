@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="project_project_rate_view_form" model="ir.ui.view">
+        <field name="name">project.project.rate.view.form</field>
+        <field name="model">project.project.rate</field>
+        <field name="arch" type="xml">
+            <form string="Project">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="sequence" readonly="1"/>
+                        </h1>
+                    </div>                
+                    <group>
+                        <group name ="general_info" string="General Info">
+                            <field name="name"/>
+                        </group>
+
+                        <group name ="country" string="Country">
+                            <field name="rate_country_id"/> 
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="project_worksite" string="Project Worksites">
+                            <field name="project_worksite_ids" >                            
+                                <tree editable="bottom">
+                                    <field name="serial_number" />
+                                    <field name="sequence" />
+                                    <field name="name"/>
+                                </tree>
+                                <form>
+                                    <sheet>
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                            </group>
+                                            <group>
+                                                <field name="project_rate_id"/>
+                                            </group>
+                                            
+                                        </group>
+                                    </sheet>
+
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" groups="base.group_user"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_project_rate_view_tree" model="ir.ui.view">
+        <field name="name">project.project.rate.view.tree</field>
+        <field name="model">project.project.rate</field>
+        <field name="arch" type="xml">
+            <tree string="Project Rate">
+                <field name="sequence" />
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_project_rate_action" model="ir.actions.act_window">
+        <field name="name">Project Rate</field>
+        <field name="res_model">project.project.rate</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                Add a new Project Rate
+            </p>
+        </field>
+    </record>
+    
+</odoo>

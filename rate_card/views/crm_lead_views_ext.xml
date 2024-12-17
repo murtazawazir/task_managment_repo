@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- Inherit CRM Form View to Modify it -->
+        <record id="crm_lead_views_form_ext" model="ir.ui.view">
+            <field name="name">crm.lead.views.form.ext</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='opportunity_partner']/field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create':True,'no_create_edit': True}</attribute>
+                </xpath>
+
+                <xpath expr="//group[@name='lead_partner']/field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create':True,'no_create_edit': True}</attribute>
+                </xpath>
+<!--                <xpath expr="//field[@name='phone']" position="after">-->
+<!--                    -->
+<!--                </xpath>-->
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="service_type_ids" widget='many2many_tags'/>
+                    <field name="sla_ids" widget='many2many_tags'/>
+                </xpath>
+            </field>
+        </record>
+</odoo>

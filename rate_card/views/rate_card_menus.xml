@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Sale Menus-->
+    <menuitem
+            id="rate_card_sale_menu"
+            name="Rate Card"
+            parent="sale.menu_sale_config"
+            sequence="10"/>
+
+
+    <menuitem
+            id="sale_rate_region_sub_menu"
+            name="Region"
+            action="rate_card.rate_region_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="5"/>
+
+    <menuitem
+            id="sale_rate_country_sub_menu"
+            name="Country"
+            action="rate_card.rate_country_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="10"/>
+
+    <menuitem
+            id="sale_rate_city_sub_menu"
+            name="City"
+            action="rate_card.rate_city_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="20"/>
+
+    <menuitem
+            id="sale_project_sla_sub_menu"
+            name="SLAs"
+            action="rate_card.project_sla_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="30"/>
+
+    <menuitem
+            id="sale_project_skill_sub_menu"
+            name="Skillset"
+            action="rate_card.project_skill_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="40"/>
+
+    <menuitem
+            id="sale_project_worksite_sub_menu"
+            name="Worksite"
+            action="rate_card.project_worksite_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="50"/>
+
+    <menuitem
+            id="sale_project_project_rate_sub_menu"
+            name="Project"
+            action="rate_card.project_project_rate_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="60"/>
+
+    <menuitem
+            id="sale_service_type_sub_menu"
+            name="Service Type"
+            action="rate_card.service_type_action"
+            parent="rate_card.rate_card_sale_menu"
+            sequence="70"/>
+
+
+    <!--CRM Menus-->
+    <menuitem
+            id="rate_card_crm_menu"
+            name="Rate Card"
+            parent="crm.crm_menu_config"
+            sequence="10"/>
+
+
+    <menuitem
+            id="crm_rate_region_sub_menu"
+            name="Region"
+            action="rate_card.rate_region_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="5"/>
+
+    <menuitem
+            id="crm_rate_country_sub_menu"
+            name="Country"
+            action="rate_card.rate_country_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="10"/>
+
+    <menuitem
+            id="crm_rate_city_sub_menu"
+            name="City"
+            action="rate_card.rate_city_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="20"/>
+
+    <menuitem
+            id="crm_project_sla_sub_menu"
+            name="SLAs"
+            action="rate_card.project_sla_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="30"/>
+
+    <menuitem
+            id="crm_project_skill_sub_menu"
+            name="Skillset"
+            action="rate_card.project_skill_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="40"/>
+
+    <menuitem
+            id="crm_project_worksite_sub_menu"
+            name="Worksite"
+            action="rate_card.project_worksite_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="50"/>
+
+    <menuitem
+            id="crm_project_project_rate_sub_menu"
+            name="Project"
+            action="rate_card.project_project_rate_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="60"/>
+
+    <menuitem
+            id="crm_service_type_sub_menu"
+            name="Service Type"
+            action="rate_card.service_type_action"
+            parent="rate_card.rate_card_crm_menu"
+            sequence="70"/>
+
+    <!--    Imports-->
+    <menuitem
+            id="import_menus"
+            name="Imports"
+            parent="sale.menu_sale_config"
+            sequence="20"/>
+
+    <menuitem
+            id="project_sla_line_import_menu"
+            name="SLA Rates Import"
+            action="rate_card.project_sla_line_action"
+            parent="rate_card.import_menus"
+            groups="base.group_no_one"
+            sequence="1"/>
+    <menuitem
+            id="sale_service_type_line_sub_menu"
+            name="Service Rates Import"
+            action="rate_card.service_type_line_action"
+            parent="rate_card.import_menus"
+            groups="base.group_no_one"
+            sequence="2"/>
+
+    <!--    HR app Rate Card Views-->
+    <!--Rate Card Main Menus-->
+    <menuitem
+            id="hr_rate_card_main_menu"
+            name="Rate Card"
+            parent="hr.menu_human_resources_configuration"
+            sequence="40"/>
+    <!--WorkSite Sub Menus-->
+    <menuitem
+        id="hr_project_worksite_sub_menu"
+        name="Worksite"
+        action="rate_card.project_worksite_action"
+        parent="rate_card.hr_rate_card_main_menu"
+        sequence="10"/>
+
+</odoo>

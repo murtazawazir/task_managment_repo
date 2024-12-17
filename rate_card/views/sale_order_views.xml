@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Tree View to Modify it -->
+    <record id="view_order_tree" model="ir.ui.view">
+        <field name="name">sale.order.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="project_name"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button name="action_view_worksite" type="object" class="oe_stat_button" icon="fa-cube"
+                        invisible="worksite_count == 0">
+                    <field name="worksite_count" widget="statinfo" string="WorkSites"/>
+                </button>
+            </div>
+            <xpath expr="//button[@id='create_invoice']" position="attributes">
+                    <attribute name="invisible">invoice_status != 'to invoice' or invoice_count > 0</attribute>
+            </xpath>
+            <group name="sale_total" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </group>
+            <field name="order_line" position="before">
+                <group>
+                    <group name="region_country_city" string="Location">
+                        <field name="region_ids" widget="many2many_tags" required="1"
+                               readonly="state in ('sale', 'cancel')"
+                               options="{'no_create':True,'no_create_edit': True}"/>
+                        <field name="country_ids" widget="many2many_tags" required="1"
+                               readonly="state in ('sale', 'cancel')"
+                               options="{'no_create':True,'no_create_edit': True}"/>
+                        <field name="city_ids" widget="many2many_tags" readonly="state in ('sale', 'cancel')"
+                               options="{'no_create':True,'no_create_edit': True}"/>
+                        <field name="language_ids" widget="many2many_tags" column_invisible="True"  invisible="1"/>
+                    </group>
+                    <group name="sla" string="Service Detail">
+                        <field name="service_type_id" options="{'no_create':True,'no_create_edit': True}"
+                               readonly="state in ('sale', 'cancel')"/>
+                        <field name="with_sla" invisible="1"/>
+                        <field name="sla_ids" widget="many2many_tags" invisible="not with_sla" required="with_sla"
+                               options="{'no_create':True,'no_create_edit': True}"
+                               readonly="state in ('sale', 'cancel')"/>
+                        <field name="skill_id" options="{'no_create':True,'no_create_edit': True}" required="1"
+                               readonly="state in ('sale', 'cancel')"/>
+                        <field name="out_of_office" readonly="state in ('sale', 'cancel')"/>
+                        <field name="weekend" readonly="state in ('sale', 'cancel')"/>
+                    </group>
+                    <group name="discount" string="Discount">
+                        <field name="discount_fixed" groups="rate_card.group_fixed_discount_per_so_line" />
+                        <field name="discount" groups="rate_card.group_percentage_discount_per_so_line" />
+                    </group>
+                    <group name="submit" string="Submit">
+                        <button name="create_order_lines"
+                                type="object"
+                                string="Submit"
+                                class="btn-primary" invisible="state in ('sale', 'cancel')"/>
+                        <button name="clear_all_lines"
+                                type="object"
+                                string="Clear Lines"
+                                class="btn-danger" invisible="state in ('sale', 'cancel')"/>
+                    </group>
+                </group>
+            </field>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="options">{'no_create':True,'no_create_edit': True}</attribute>
+            </xpath>
+            <xpath expr="//group[@name='sale_header']" position="before">
+                <div class="row col-12">
+                    <div class="col-8">
+                        <div class="oe_title">
+                        <label for="project_name" string="Project Name"/>
+                        <h3>
+                            <field name="project_name" nolabel="1" placeholder="Type Project Name" required="True"/>
+                        </h3>
+                    </div>
+                    </div>
+                    <div class="col-4"></div>
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+                <field name="skill_id" optional="hide" options="{'no_create':True,'no_create_edit': True}"/>
+                <field name="svc_desc" readonly="1"/>
+                <field name="rate_region_id" readonly="1" optional="hide" column_invisible="True"/>
+                <field name="country_id" readonly="1" optional="hide" column_invisible="True"/>
+                <field name="city_id" readonly="1" optional="hide" column_invisible="True"/>
+                <field name="svc_type_id" readonly="1" optional="hide" column_invisible="True"/>
+                <field name="sla_id" readonly="1" optional="hide" column_invisible="True"/>
+                <field name="worksite_id" readonly="0" optional="hide"
+                       options="{'no_create':True,'no_create_edit': True}"/>
+                <field name="with_sla" column_invisible="True"/>
+                <field name="language_ids" widget="many2many_tags" optional="hide"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="after">
+                <field name="out_of_office_display" readonly="1" optional="show"/>
+                <field name="holiday_display" readonly="1" optional="show"/>
+                <field name="worksite_travel_cost" optional="show"/>
+                <field name="job_description" optional="hide" type="html" options="{'collaborative': true, 'resizable': false}" placeholder="Add details about this Job..."/>
+                 <field name="invoice_id" optional="hide" />
+                <button name="action_create_invoice" type="object" string="Create Invoice" class="btn-primary" invisible="invoice_id != False or state in ('draft','sent', 'cancel')"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                <attribute name="string">Worksite Description</attribute>
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                <attribute name="widget">monetary</attribute>
+                <attribute name="options">{'currency_field': 'currency_id'}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//label[@for='discount']" position="attributes">
+                <attribute name="groups">
+                    product.group_discount_per_so_line,rate_card.group_percentage_discount_per_so_line
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="replace">
+                <field name="discount" string="Disc.%"
+                       groups="rate_card.group_percentage_discount_per_so_line"
+                       optional="show"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/form//label[@for='discount']" position="before">
+                <field name="discount_fixed" groups="rate_card.group_fixed_discount_per_so_line"/>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="before">
+                <field name="discount_fixed" groups="rate_card.group_fixed_discount_per_so_line" optional="show"/>
+            </xpath>
+            <button name="action_open_discount_wizard" position="replace">
+                <button string="Discount" name="action_open_discount_wizard" type="object" class="btn btn-secondary" invisible="1"/>
+            </button>
+            <xpath expr="//field[@name='order_line']/tree/control" position="replace">
+                <!-- This empty replace will remove the control section -->
+            </xpath>
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="options">{'no_create':True}</attribute>
+
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom'][2]" position="attributes">
+                <attribute name="string">Hours</attribute>
+            </xpath>
+<!--            <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">-->
+<!--                <attribute name="column_invisible">1</attribute>-->
+<!--            </xpath>-->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='analytic_distribution']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='customer_lead']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="sale_order_revisions_view_search" model="ir.ui.view">
+        <field name="model">sale.order</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <group expand="0" string="Group By">
+                    <filter string="Revision" name="current_revision_id" context="{'group_by':'current_revision_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Inherit the existing sale.order search view -->
+    <record id="inherit_sale_order_filter" model="ir.ui.view">
+        <field name="name">sale.order.inherit.select</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+        <field name="arch" type="xml">
+            <!-- Add the sequence field to the search view -->
+            <field name="name" position="before">
+                <field name="project_name" string="Project"/>
+            </field>
+            <!-- Add a filter for the sequence field -->
+            <xpath expr="//filter[@name='my_sale_orders_filter']" position="before">
+                <filter string="Projects" name="project_name" domain="[('project_name', '!=', False)]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="action_revisions" model="ir.actions.act_window">
+        <field name="name">Revisions</field>
+        <field name="res_model">sale.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="sale_order_revisions_view_search"/>
+        <field name="domain">["|", ("active", "=", False), ("active", "=", True), ("current_revision_id", "!=",
+            False)]
+        </field>
+        <field name="context">{"active_test": 0, "search_default_current_revision_id": 1}</field>
+    </record>
+
+    <menuitem id="menu_order_revisions"
+              name="Revisions"
+              action="action_revisions"
+              groups="sales_team.group_sale_salesman"
+              parent="sale.sale_order_menu"
+              sequence="25"/>
+</odoo>

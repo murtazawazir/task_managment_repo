@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_skill_view_form" model="ir.ui.view">
+        <field name="name">project.skill.view.form</field>
+        <field name="model">project.skill</field>
+        <field name="arch" type="xml">
+            <form string="Project Skill">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="sequence" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group name="general_info" string="General Info">
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="project_skill_parent_id" domain="[('id', '!=', id)]"/>
+                        </group>
+                    </group>
+                    <!-- Tab Job Description -->
+                    <notebook>
+                        <page name="description_page" string="JD">
+                            <field name="job_description" type="html" options="{'collaborative': true, 'resizable': false}" placeholder="Add details about this Job..."/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="project_skill_view_tree" model="ir.ui.view">
+        <field name="name">project.skill.view.tree</field>
+        <field name="model">project.skill</field>
+        <field name="arch" type="xml">
+            <tree string="Project Skill">
+                <field name="sequence"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_skill_action" model="ir.actions.act_window">
+        <field name="name">Project Skill</field>
+        <field name="res_model">project.skill</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Add a new Project Skill
+            </p>
+        </field>
+    </record>
+
+</odoo>

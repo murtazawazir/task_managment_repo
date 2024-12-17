@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_import_country_wizard_form" model="ir.ui.view">
+        <field name="name">rate_card.country.wizard.form</field>
+        <field name="model">rate.card.country.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Countries">
+                <group>
+                    <field name="attachment" widget="binary"/>
+                    <field name="file_name" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Import" type="object" name="action_import_countries" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_sale_import_country_wizard" model="ir.actions.server">
+        <field name="name">Import Countries</field>
+        <field name="model_id" ref="rate_card.model_rate_card_country_wizard"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">action = env['sale.order'].browse(env.context.get('active_ids')).action_open_import_wizard()</field>
+    </record>
+
+</odoo>
