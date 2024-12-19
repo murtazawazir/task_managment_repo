@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record id="wizard_view_id" model="ir.ui.view">
+            <field name="name">wizard.view</field>
+            <field name="model">wizard.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="import_type"/>
+                                <field name="product_ids" widget="many2many_tags" invisible="import_type != 'product'" />
+                                <field name="product_category" invisible="import_type != 'category'"/>
+                                <field name="sale_policy_id" invisible="import_type != 'sale_policy'"/>
+                                <field name="product_template" invisible="import_type != 'template'" />
+
+<!--                                <field name="price_list"/>-->
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="import_product" string="Import" class="oe_highlight" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_action_id" model="ir.actions.act_window">
+            <field name="name">Wizard</field>
+            <field name="res_model">wizard.wizard</field>
+            <field name="view_mode">form,tree</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

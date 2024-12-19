@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="product_price_list_sales_view_id" model="ir.ui.view">
+            <field name="name">product.pricelist.view</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='item_ids']/tree/field[@name ='fixed_price']" position="after">
+                    <field name="discount"/>
+                    <field name="discount_amount"/>
+                    <field name="net_amount"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

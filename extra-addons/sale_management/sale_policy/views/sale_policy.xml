@@ -1,0 +1,118 @@
+<odoo>
+    <data>
+        <!--        Form View-->
+        <record id="sale_policy_form_view_id" model="ir.ui.view">
+            <field name="name">sale policy</field>
+            <field name="model">sale.policy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <header>
+                            <field name="status" widget="statusbar"/>
+                        </header>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="policy_type"/>
+                                <field name="is_credit"/>
+                                <field name="is_secure_credit"/>
+                                <field name="is_bg_allowed"/>
+                                <field name="temporary_credit_limit"/>
+                            </group>
+                            <group>
+                                <field name="company_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="COLLECTION LIMITS DATE">
+                                <field name="collections_start_date"/>
+                                <field name="collections_end_date"/>
+                                <field name="collections_grace_period"/>
+                            </group>
+                            <group string="SALE DATE LIMITS">
+                                <field name="sale_start_date"/>
+                                <field name="sale_end_date"/>
+                                <field name="sale_grace_period"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Active/Not Active">
+                                <group>
+                                    <group>
+                                        <field name="is_active"/>
+                                        <field name="is_sale_active"/>
+                                        <field name="is_collection_active"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Partner">
+
+                            </page>
+                            <page name="sale_policy_line_ids" string="Product">
+
+                                <div class="row col-12">
+                                    <div class="col-2">
+                                        <button name="export_button" string="Export" type="object"
+                                                class="oe_highlight"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <button name="import_product" string="Import Product" type="object"
+                                                class="oe_highlight"/>
+                                    </div>
+                                    <div class="col-4">
+                                    </div>
+                                </div>
+
+                                <field name="sale_policy_line_ids">
+                                    <tree editable="bottom">
+                                        <field name="product_id"/>
+                                        <field name="product_category_id"/>
+                                        <field name="product_template_id"/>
+                                        <field name="unit_of_measure"/>
+                                        <field name="price_list_discount"/>
+                                        <field name="extra_discount"/>
+                                        <field name="discount_amount"/>
+                                        <field name="net_amount"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!--        Tree View-->
+        <record id="sale_policy_tree_view_id" model="ir.ui.view">
+            <field name="name">sale policy</field>
+            <field name="model">sale.policy</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="policy_type"/>
+                    <field name="is_credit"/>
+                    <field name="is_secure_credit"/>
+                    <field name="is_bg_allowed"/>
+                    <field name="temporary_credit_limit"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+        <!--        Action-->
+        <record id="sale_policy_action" model="ir.actions.act_window">
+            <field name="name">Sale Policy</field>
+            <field name="res_model">sale.policy</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem id="sale_policy_menuitem_id" name="Sale Policy" action="sale_policy_action" />
+        <menuitem id="configuration_menuitem_id" name="Configuration" parent="sale_policy.sale_policy_menuitem_id" action="sale_policy_action" sequence="1"/>
+        <menuitem id="update_policy_menuitem_id" name="Upadte Policy" parent="configuration_menuitem_id" action="update_policy_action_id" sequence="1"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record id="update_policy_view_id" model="ir.ui.view">
+            <field name="name">update.policy.view</field>
+            <field name="model">update.policy</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="price_list"/>
+                                <field name="sale_policy_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="update_policy_action_id" model="ir.actions.act_window">
+            <field name="name">Update Policy</field>
+            <field name="res_model">update.policy</field>
+            <field name="view_mode">form,tree</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

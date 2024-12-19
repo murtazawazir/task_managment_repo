@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sale_policy,sale.policy,model_sale_policy,,1,1,1,1
+access_sale.policy.line.id,sale.policy.line.name,model_sale_policy_line,,1,1,1,1
+access_sale.wizard.id,sale.wizard.name,model_wizard_wizard,,1,1,1,1
+access_update.policy.id,update.policy.name,model_update_policy,,1,1,1,1
+
